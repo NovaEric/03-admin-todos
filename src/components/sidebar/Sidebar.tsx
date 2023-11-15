@@ -1,21 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CiBookmarkCheck, CiLogout } from "react-icons/ci";
+import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
 import { SidebarMenuItem } from "..";
 import { SidebarMenuItemProps } from "./SidebarMenuItem";
+import { CiLogout } from "react-icons/ci";
 
 const menuItems: SidebarMenuItemProps[] = [
   {
     title: "Dashboard",
-    icon: <CiBookmarkCheck size={30} />,
+    icon: <IoCalendarOutline size={30} />,
     subtitle: "",
     path: "/dashboard",
   },
   {
-    title: "Categories",
-    icon: <CiBookmarkCheck size={30} />,
+    title: "REST TODOS",
+    icon: <IoCheckboxOutline size={30} />,
     subtitle: "",
     path: "/dashboard/rest-todos",
+  },
+  {
+    title: "Server Actions",
+    icon: <IoListOutline size={30} />,
+    subtitle: "",
+    path: "/dashboard/server-todos",
   },
 ];
 
@@ -38,8 +45,8 @@ export const Sidebar = () => {
         <div className="mt-8 text-center">
           <Image
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3V808oCxPrW0lGe2AQABhwz-_3BCpyRj8Cw&usqp=CAU"
-            width={20}
-            height={20}
+            width={200}
+            height={200}
             alt=""
             className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
           />
