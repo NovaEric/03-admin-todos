@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
+import { IoBasketOutline, IoCalendarOutline, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
 import { SidebarMenuItem } from "..";
 import { SidebarMenuItemProps } from "./SidebarMenuItem";
 import { CiLogout } from "react-icons/ci";
+import { FaCookieBite } from "react-icons/fa";
 
 const menuItems: SidebarMenuItemProps[] = [
   {
@@ -23,6 +24,18 @@ const menuItems: SidebarMenuItemProps[] = [
     icon: <IoListOutline size={30} />,
     subtitle: "",
     path: "/dashboard/server-todos",
+  },
+  {
+    title: "Cookies",
+    icon: <FaCookieBite size={30} />,
+    subtitle: "",
+    path: "/dashboard/cookies",
+  },
+  {
+    title: "Products",
+    icon: <IoBasketOutline size={30} />,
+    subtitle: "",
+    path: "/dashboard/products",
   },
 ];
 
