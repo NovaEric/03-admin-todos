@@ -1,0 +1,59 @@
+# To better understand this file read this:
+# https://docs.ionos.space/docs/github-actions-customization/
+
+name: "Deploy Now: Execute Build"
+
+on:
+  workflow_call:
+    inputs:
+      site-url:
+        required: true
+        type: string
+      branch-id:
+        required: true
+        type: string
+
+env:
+  DEPLOYMENT_FOLDER: public
+
+jobs:
+# Please do not rename this job
+  build-project:
+    name: build 03-admin-todos
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: v16.x
+
+      - name: Build Node assets
+        env:
+          CI: true
+          GITHUB_ID: 61b60245a435fd21f59e
+          GITHUB_SECRET: 884dda165304c8c89e561304c9f2679264011047
+          GOOGLE_CLIENT_ID: 48538970508-5q1ehb8p26pl3k9i4n8c4i276fncllj7.apps.googleusercontent.com
+          GOOGLE_CLIENT_SECRET: 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
+          NEXTAUTH_SECRET: 769a5f772a1ddb52da2b8290f66f23a3
+          SITE_URL: ${{ inputs.site-url }}
+        run: |
+          npm ci
+          npm run build
+
+# Please do not touch the following action
+      - name: Store deployment content
+        uses: ionos-deploy-now/artifact-action@v1
+        with:
+          api-key: ${{ secrets.IONOS_API_KEY }}
+          service-host: api-us.ionos.space
+          project-id: dbae5d8c-5897-4c71-966f-e9843f0c6942
+          branch-id: ${{ inputs.branch-id }}
+          version: ${{ github.sha }}
+          folder: ${{ env.DEPLOYMENT_FOLDER }}
+          config-file: .deploy-now/03-admin-todos/config.yaml
+          action: upload
