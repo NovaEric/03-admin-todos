@@ -12,7 +12,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 grid-cols-1">
       <WidgetItem tittle="User online">
         <div className="flex flex-col">
           <span>{ session.user?.name }</span>

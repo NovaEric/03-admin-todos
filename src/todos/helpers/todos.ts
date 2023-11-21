@@ -42,3 +42,4 @@ export const deleteTodos = async (): Promise<Todo> => {
 
     return todo;
 }
+

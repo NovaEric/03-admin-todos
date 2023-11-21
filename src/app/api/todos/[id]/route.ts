@@ -1,3 +1,4 @@
+import { getUserSessionServer } from "@/auth";
 import prisma from "@/lib/prisma";
 import { Todo } from "@prisma/client";
 import { NextResponse } from "next/server";
@@ -10,10 +11,25 @@ interface Segments {
 }
 
 const getTodos = async (id: string): Promise<Todo | null> => {
-  return await prisma.todo.findFirst({ where: { id } });
+  
+  const user = await getUserSessionServer();
+
+  if (!user) {
+    return null;
+  }
+  
+  const todos = await prisma.todo.findFirst({ where: { id } });
+
+  if (todos?.userId !== user.id) {
+    return null;
+  }
+
+  return todos;
+
 };
 
 export async function GET(request: Request, { params }: Segments) {
+
   const todoById = await getTodos(params.id);
 
   if (!todoById) {
@@ -29,6 +45,7 @@ const putSchema = yup.object({
 });
 
 export async function PUT(request: Request, { params }: Segments) {
+
   const todoById = await getTodos(params.id);
 
   if (!todoById) {

@@ -11,7 +11,9 @@
 6. Run Prisma commands: ``` npx prisma migrate dev ``` &  ```npx prisma generate```
 7. Seed [database](http://localhost:3000/api/seed)
 
-
+### Note: Default User
+__username__ root
+__password__ root
 
 ### Prisma Commands
 ```

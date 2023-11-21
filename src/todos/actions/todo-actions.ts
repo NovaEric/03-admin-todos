@@ -15,7 +15,7 @@ export const sleep = async( seconds: number = 0 ) => {
 
 export const toggleTodo = async(id:string, complete: boolean): Promise<Todo> => {
 
-    await sleep(3);
+    //await sleep(3);
 
     const todo = await prisma.todo.findFirst({ where: { id } });
 
@@ -30,10 +30,10 @@ export const toggleTodo = async(id:string, complete: boolean): Promise<Todo> => 
     return updatedTodo;
 }
 
-export const addTodo = async(description:string) => {
+export const addTodo = async( description: string, userId: string ) => {
     
     try {
-        const todo = await prisma.todo.create({data: { description }});
+        const todo = await prisma.todo.create({data: { description, userId }});
         
         revalidatePath('/dashboard/server-todos');
         return todo;
